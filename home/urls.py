@@ -16,4 +16,3 @@ if settings.DEBUG:
 
 
 
-r'^posts/<int:pk>/$'

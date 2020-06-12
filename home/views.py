@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 
 
 class HomeView(TemplateView):
-    template_name = 'home\home\home.html'
+    template_name = 'home\home.html'
     def get(self, request):
         
         form = HomeForm()
