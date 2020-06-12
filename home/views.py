@@ -59,7 +59,7 @@ def change_friend(request, operation, pk):
     return redirect('home:home')
 
     
-def deletePost(request, operation)
+
     
     
     
