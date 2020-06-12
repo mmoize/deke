@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+ {% block content %}
+<html>
+
+  <head>
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}"
+  
+    
+
+  <meta charset="utf-8">
+  <title>{% block title %}Profile{% endblock %}</title>
+
+    
+  </head>
+  <body>
+     <div class='container'>
+        {% if user.userprofile.image %}
+          <img src='{{ user.userprofile.image.url }}' width='240'>
+        {% endif %}
+     </div>
+    <div class = 'container' style=' text-align: left';>
+      <ul>
+        <li>username : {{ user.username }}</li>
+        <li>Fist Name : {{ user.first_name }}</li>
+        <li>Last name : {{ user.last_name }}</li>
+        <li>Email : {{ user.email }}</li>
+        <li>Description : {{ user.userprofile.description }}</li>
+        <li>phone : {{ user.userprofile.phone }}</li>
+        <li>city : {{ user.userprofile.city }}</li>
+        <li>website : {{ user.userprofile.website }}</li>
+      </ul>  
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+   
+  </body>
+    
+</html>
+ {% endblock  %}

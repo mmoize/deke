@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+    <head>
+    
+        {% block head %}
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+            <link rel="stylesheet" href="{% static 'css/home.css' %}">
+        
+            <meta charset="utf-8">
+            <title>Home</title>
+        
+        {% endblock %}
+     </head>
+{% block content %}
+ <body class='container'>
+        <div  style="width: 100%; overflow: hidden;" >
+            <div style="width: 600px; float: left;" > 
+              
+                <h2>Home</h2>
+                <form method='POST' action='{{ action_url }}' enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    {{ form.cover }}
+                    {{ form.post }}
+                    <button type='submit'>post</button>
+                </form>
+            
+                {% for post  in posts  %}                  
+                    <h1>{{ post.post }}</h1>
+                <img src="{{ post.cover_url|default_if_none:'#' }}" />
+
+                    <p>Posted by {{ post.user.first_name }} on {{ post.created }} </p>
+                {% endfor %}
+               
+            </div>
+            <div style="margin-left: 620px;"> 
+                <h2>Other people</h2>
+                {% for user in users  %}
+                    <a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}">
+                    <h3>{{ user.first_name }}</h3>
+                    </a>
+                    {% if not user in friends %}
+                    <a href="{% url 'home:change_friends' operation='add' pk=user.pk %}">
+                    <button type="button" class="btn btn-success">add friend</button>
+                    </a>
+                    
+                    {% endif %}
+                {% endfor %}
+            <h2>Friends</h2>
+                {% for friend in friends %}
+                    <a href="{% url 'accounts:view_profile_with_pk' pk=friend.pk %}">
+                    <h3>{{ friend.username }}</h3>
+                    </a>
+                    <a href="{% url 'home:change_friends' operation='remove' pk=friend.pk %}">
+                    <button type="button" class="btn btn-danger">Un friend</button>
+                    </a>
+                {% endfor %}
+
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    </body>
+
+   
+{% endblock  %}
+
+
