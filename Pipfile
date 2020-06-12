@@ -8,6 +8,9 @@ pylint = "*"
 
 [packages]
 django = "*"
+gunicorn = "*"
+whitenoise = "*"
+django-login-history = "*"
 
 [requires]
 python_version = "3.7"
