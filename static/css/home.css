@@ -11,3 +11,52 @@
     background-color: teal;
 }
 
+.searchbar {
+    position: absolute;
+    width: 1094px;
+    height: 106px;
+    left: 94px;
+    top: 0px;
+    display: inline;
+
+    background-color: teal;
+}
+
+.searchbarInput {
+    position: absolute;
+    width: 682px;
+    height: 65px;
+    left: 82px;
+    top: 28px;
+
+    background: #C4C4C4;
+}
+
+.searchBarEnterbtn {
+    position: absolute;
+    width: 124px;
+    height: 63px;
+    left: 782px;
+    top: 28px;
+
+    background: #C4C4C4;
+}
+
+.postDivWrapper {
+position: absolute;
+width: 1440px;
+height: 883px;
+left: 0px;
+top: 141px;
+}
+
+.PostSideServe {
+    position: absolute;
+    width: 215px;
+    height: 571px;
+    left: 1211px;
+    top: 51px;
+
+    background: #C4C4C4;
+}
+
