@@ -14,14 +14,33 @@
      </head>
 {% block content %}
  <body class='container'>
-           <div class="searchbar">
-           <div class="searchbarInput">
-           </div>
-           <div class="searchBarEnterbtn"></div>
-           </div>
+
         <div class="postDivWrapper">
+           <div>
+            <form method='POST' action='{{ action_url }}' enctype='multipart/form-data'>
+            <div class="searchbar">
+                 {% csrf_token %}
+                <div class="imageselect">
+                  {{ form.cover }}
+                </div>
+                <div class="searchbarInput">
+                    {{ form.post }}
+                </div>
+                <div class="searchBarEnterbtn">
+                    <button type='submit'>post</button>
+                </div>
+            </div>
+           </form>            
+           </div>
            <div class="containers">
-           <h2>Hello There</h2>
+                {% for post  in posts  %}                  
+                   
+                <div class="postimageDiv">
+                    <h1>{{ post.post }}</h1>
+                   <img class="postimageDivs" src="{{ post.cover_url|default_if_none:'#' }}" />
+                   <p>Posted by {{ post.user.first_name }} on {{ post.created }} </p>
+                </div>
+                {% endfor %}
            </div>
            <div class="PostSideServe">
            </div>
@@ -39,7 +58,7 @@
    
 {% endblock  %}
 
-{% comment %} <div  style="width: 100%; overflow: hidden;" >
+ <div  style="width: 100%; overflow: hidden;" >
             <div style="width: 600px; float: left;" > 
               
                 <h2>Home</h2>
@@ -82,4 +101,4 @@
                 {% endfor %}
 
             </div>
-        </div> {% endcomment %}
+        </div> 

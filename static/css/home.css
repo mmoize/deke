@@ -1,44 +1,55 @@
-
+body {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
 
 .containers {
     position: absolute;
     width: 1080px;
-    height: 1080px;
+    
     left: 108px;
-    top: 146px;
+    top: 5px;
+    flex-grow: 1;
+    text-align: center;
+    
+    margin-top: 70px;
+   
     
     
-    background-color: teal;
 }
 
 .searchbar {
     position: absolute;
+    /* position: absolute; */
     width: 1094px;
     height: 106px;
-    left: 94px;
+    left: 200px;
     top: 0px;
     display: inline;
+    text-align: center;
 
-    background-color: teal;
+    
 }
 
 .searchbarInput {
     position: absolute;
     width: 682px;
-    height: 65px;
-    left: 82px;
-    top: 28px;
+    
+    left: 141px;
+    top: 30px;
+    object-fit: fill;
 
     background: #C4C4C4;
 }
 
 .searchBarEnterbtn {
     position: absolute;
-    width: 124px;
-    height: 63px;
-    left: 782px;
-    top: 28px;
 
+    left: 873px;
+    top: 33px;
+    object-fit: contain;
     background: #C4C4C4;
 }
 
@@ -47,7 +58,8 @@ position: absolute;
 width: 1440px;
 height: 883px;
 left: 0px;
-top: 141px;
+top: 85px;
+display: inline;
 }
 
 .PostSideServe {
@@ -59,4 +71,35 @@ top: 141px;
 
     background: #C4C4C4;
 }
+
+.imageselect {
+    position: absolute;
+    width: 104px;
+    height: 65px;
+    left: 12px;
+    top: 33px;
+    object-fit: contain;
+}
+
+.postimageDiv {
+    
+    width: 614px;
+    max-height: 1000px;
+    left: 233px;
+    top: 18px;
+
+    object-fit: fill;
+    text-align: center;
+    margin-left: 25%;
+}
+
+.postimageDivs {
+    min-width: 614px;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    
+}
+
+
 
