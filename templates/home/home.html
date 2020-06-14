@@ -17,24 +17,25 @@
      </head>
 {% block content %}
  <body class='container'>
-    
-           <div class="containers">
-            <div class="col-md-4">
-                    <form method='POST' action='{{ action_url }}' enctype='multipart/form-data'>
-                        <div class="searchbar">
-                            {% csrf_token %}
-                            <div class="imageselect">
-                            {{ form.cover }}
+            <div id="divPost" class="row">
+                <div  class="col-md-4">
+                        <form method='POST' action='{{ action_url }}' enctype='multipart/form-data'>
+                            <div class="searchbar">
+                                {% csrf_token %}
+                                <div class="imageselect">
+                                  {{ form.cover }}
+                                </div>
+                                <div class="searchbarInput">
+                                    {{ form.post }}
+                                </div>
+                                <div class="searchBarEnterbtn">
+                                    <button type='submit'>post</button>
+                                </div>
                             </div>
-                            <div class="searchbarInput">
-                                {{ form.post }}
-                            </div>
-                            <div class="searchBarEnterbtn">
-                                <button type='submit'>post</button>
-                            </div>
-                        </div>
-                    </form>            
+                        </form>            
+                </div>
             </div>
+           <div class="containers">
                 {% for post  in posts  %}      
 
                 <div id="rows" class="row">
