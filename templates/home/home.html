@@ -6,7 +6,10 @@
         {% block head %}
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
             <link rel="stylesheet" href="{% static 'css/home.css' %}">
-        
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
             <meta charset="utf-8">
             <title>Home</title>
         
@@ -14,37 +17,77 @@
      </head>
 {% block content %}
  <body class='container'>
-
-        <div class="postDivWrapper">
-           <div>
-            <form method='POST' action='{{ action_url }}' enctype='multipart/form-data'>
-            <div class="searchbar">
-                 {% csrf_token %}
-                <div class="imageselect">
-                  {{ form.cover }}
-                </div>
-                <div class="searchbarInput">
-                    {{ form.post }}
-                </div>
-                <div class="searchBarEnterbtn">
-                    <button type='submit'>post</button>
-                </div>
-            </div>
-           </form>            
-           </div>
+    
            <div class="containers">
-                {% for post  in posts  %}                  
-                   
-                <div class="postimageDiv">
+            <div class="col-md-4">
+                    <form method='POST' action='{{ action_url }}' enctype='multipart/form-data'>
+                        <div class="searchbar">
+                            {% csrf_token %}
+                            <div class="imageselect">
+                            {{ form.cover }}
+                            </div>
+                            <div class="searchbarInput">
+                                {{ form.post }}
+                            </div>
+                            <div class="searchBarEnterbtn">
+                                <button type='submit'>post</button>
+                            </div>
+                        </div>
+                    </form>            
+            </div>
+                {% for post  in posts  %}      
+
+                <div id="rows" class="row">
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                        <a href="/w3images/lights.jpg" target="_blank">
+                                <img class="postimageDivs" alt="Lights" style="width:100%" src="{{ post.cover_url|default_if_none:'#' }}" />
+                                <div class="caption">
+                                    <p>Posted by {{ post.user.first_name }} on {{ post.created }} </p>
+                                </div>
+                            </a>
+                        {% comment %} <div class="postimageDiv">
+
+                        </div> {% endcomment %}
+                        </div>
+                    </div>
+
+                </div>  
+
+                <div class="row" id="PostSideServe">
+                  <div class="col-md-4">
+                     <h2>Other people</h2>
+                    {% for user in users  %}
+                        <a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}">
+                        <h3>{{ user.first_name }}</h3>
+                        </a>
+                        {% if not user in friends %}
+                        <a href="{% url 'home:change_friends' operation='add' pk=user.pk %}">
+                        <button type="button" class="btn btn-success">add friend</button>
+                        </a>
+                        
+                        {% endif %}
+                    {% endfor %}
+                    <h2>Friends</h2>
+                    {% for friend in friends %}
+                        <a href="{% url 'accounts:view_profile_with_pk' pk=friend.pk %}">
+                        <h3>{{ friend.username }}</h3>
+                        </a>
+                        <a href="{% url 'home:change_friends' operation='remove' pk=friend.pk %}">
+                        <button type="button" class="btn btn-danger">Un friend</button>
+                        </a>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                {% comment %} <div class="postimageDiv">
                     <h1>{{ post.post }}</h1>
                    <img class="postimageDivs" src="{{ post.cover_url|default_if_none:'#' }}" />
                    <p>Posted by {{ post.user.first_name }} on {{ post.created }} </p>
-                </div>
+                </div> {% endcomment %}
                 {% endfor %}
            </div>
-           <div class="PostSideServe">
-           </div>
-        </div>
+    
         
 
         
@@ -90,7 +133,7 @@
                     
                     {% endif %}
                 {% endfor %}
-            <h2>Friends</h2>
+                 <h2>Friends</h2>
                 {% for friend in friends %}
                     <a href="{% url 'accounts:view_profile_with_pk' pk=friend.pk %}">
                     <h3>{{ friend.username }}</h3>
