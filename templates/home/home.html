@@ -1,22 +1,179 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block content %}
+<html lang="en">
 
     <head>
     
         {% block head %}
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
-            <link rel="stylesheet" href="{% static 'css/home.css' %}">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+            {% comment %} <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"> {% endcomment %}
+            <link rel="stylesheet" href="{% static 'css/style.css' %}">
+            {% comment %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> {% endcomment %}
             <meta charset="utf-8">
-            <title>Home</title>
+            <title>Feed | Instaclone</title>
+            <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+            <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+            <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         
         {% endblock %}
      </head>
-{% block content %}
- <body class='container'>
+        <body >
+            <main class="feed">
+               {% for post  in posts  %}   
+                    <section class="photo">
+                        <header class="photo__header">
+                            <div class="photo__header-column">
+                                <img
+                                    class="photo__avatar"
+                                    src="{% static 'images/avatar.jpg'  %}"
+                                />
+                            </div>
+                            <div class="photo__header-column">
+                                <span class="photo__username">{{ post.user.first_name }}</span>
+                                <span class="photo__location">European Art of Living Center - Bad Antogast</span>
+                            </div>
+                        </header>
+                        <div class="photo__file-container">
+                            <img
+                                class="photo__file"
+                                src="{{ post.cover_url|default_if_none:'#' }}"
+                            />
+                        </div>
+                        <div class="photo__info">
+                            <div class="photo__icons">
+                                <span class="photo__icon">
+                                    <i class="fa fa-heart-o heart fa-lg"></i>
+                                </span>
+                                <span class="photo__icon">
+                                    <i class="fa fa-comment-o fa-lg"></i>
+                                </span>
+                            </div>
+                            <span class="photo__likes">35 likes</span>
+                            <ul class="photo__comments">
+                                <li class="photo__comment">
+                                    <span class="photo__comment-author">serranoarevalo</span>wow this is great!
+                                </li>
+                                <li class="photo__comment">
+                                    <span class="photo__comment-author">lynn</span>no is not!
+                                </li>
+                            </ul>
+                            <span class="photo__time-ago">11 hours ago</span>
+                            <div class="photo__add-comment-container">
+                                <textarea placeholder="Add a comment..." class="photo__add-comment"></textarea>
+                                <i class="fa fa-ellipsis-h"></i>
+                            </div>
+                        </div>
+                    </section>
+                {% endfor %}
+                <section class="photo">
+                    <header class="photo__header">
+                        <div class="photo__header-column">
+                            <img
+                                class="photo__avatar"
+                                src=" {% static 'images/avatar.jpg'  %}"
+                            />
+                        </div>
+                        <div class="photo__header-column">
+                            <span class="photo__username">serranoarevalo</span>
+                            <span class="photo__location">European Art of Living Center - Bad Antogast</span>
+                        </div>
+                    </header>
+                    <div class="photo__file-container">
+                        <img
+                            class="photo__file"
+                            src=" {% static 'images/feedPhoto.jpg'  %}"
+                        />
+                    </div>
+                    <div class="photo__info">
+                        <div class="photo__icons">
+                            <span class="photo__icon">
+                                <i class="fa fa-heart-o heart fa-lg"></i>
+                            </span>
+                            <span class="photo__icon">
+                                <i class="fa fa-comment-o fa-lg"></i>
+                            </span>
+                        </div>
+                        <span class="photo__likes">35 likes</span>
+                        <ul class="photo__comments">
+                            <li class="photo__comment">
+                                <span class="photo__comment-author">serranoarevalo</span>wow this is great!
+                            </li>
+                            <li class="photo__comment">
+                                <span class="photo__comment-author">lynn</span>no is not!
+                            </li>
+                        </ul>
+                        <span class="photo__time-ago">11 hours ago</span>
+                        <div class="photo__add-comment-container">
+                            <textarea placeholder="Add a comment..." class="photo__add-comment"></textarea>
+                            <i class="fa fa-ellipsis-h"></i>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+    
+
+            {% block scripts %}                    
+                <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+                <script src=" {% static 'js/app.js' %}"></script>
+                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            {% endblock %}
+        </body>
+
+    </html> 
+{% endblock  %}
+
+ {% comment %} <div  style="width: 100%; overflow: hidden;" >
+            <div style="width: 600px; float: left;" > 
+              
+                <h2>Home</h2>
+                <form method='POST' action='{{ action_url }}' enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    {{ form.cover }}
+                    {{ form.post }}
+                    <button type='submit'>post</button>
+                </form>
+            
+                {% for post  in posts  %}                  
+                    <h1>{{ post.post }}</h1>
+                <img src="{{ post.cover_url|default_if_none:'#' }}" />
+
+                    <p>Posted by {{ post.user.first_name }} on {{ post.created }} </p>
+                {% endfor %}
+               
+            </div>
+            <div style="margin-left: 620px;"> 
+                <h2>Other people</h2>
+                {% for user in users  %}
+                    <a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}">
+                    <h3>{{ user.first_name }}</h3>
+                    </a>
+                    {% if not user in friends %}
+                    <a href="{% url 'home:change_friends' operation='add' pk=user.pk %}">
+                    <button type="button" class="btn btn-success">add friend</button>
+                    </a>
+                    
+                    {% endif %}
+                {% endfor %}
+                 <h2>Friends</h2>
+                {% for friend in friends %}
+                    <a href="{% url 'accounts:view_profile_with_pk' pk=friend.pk %}">
+                    <h3>{{ friend.username }}</h3>
+                    </a>
+                    <a href="{% url 'home:change_friends' operation='remove' pk=friend.pk %}">
+                    <button type="button" class="btn btn-danger">Un friend</button>
+                    </a>
+                {% endfor %}
+
+            </div>
+        </div>  {% endcomment %}
+
+
             <div id="divPost" class="row">
                 <div  class="col-md-4">
                         <form method='POST' action='{{ action_url }}' enctype='multipart/form-data'>
@@ -92,57 +249,3 @@
         
 
         
-
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    </body>
-
-   
-{% endblock  %}
-
- <div  style="width: 100%; overflow: hidden;" >
-            <div style="width: 600px; float: left;" > 
-              
-                <h2>Home</h2>
-                <form method='POST' action='{{ action_url }}' enctype='multipart/form-data'>
-                    {% csrf_token %}
-                    {{ form.cover }}
-                    {{ form.post }}
-                    <button type='submit'>post</button>
-                </form>
-            
-                {% for post  in posts  %}                  
-                    <h1>{{ post.post }}</h1>
-                <img src="{{ post.cover_url|default_if_none:'#' }}" />
-
-                    <p>Posted by {{ post.user.first_name }} on {{ post.created }} </p>
-                {% endfor %}
-               
-            </div>
-            <div style="margin-left: 620px;"> 
-                <h2>Other people</h2>
-                {% for user in users  %}
-                    <a href="{% url 'accounts:view_profile_with_pk' pk=user.pk %}">
-                    <h3>{{ user.first_name }}</h3>
-                    </a>
-                    {% if not user in friends %}
-                    <a href="{% url 'home:change_friends' operation='add' pk=user.pk %}">
-                    <button type="button" class="btn btn-success">add friend</button>
-                    </a>
-                    
-                    {% endif %}
-                {% endfor %}
-                 <h2>Friends</h2>
-                {% for friend in friends %}
-                    <a href="{% url 'accounts:view_profile_with_pk' pk=friend.pk %}">
-                    <h3>{{ friend.username }}</h3>
-                    </a>
-                    <a href="{% url 'home:change_friends' operation='remove' pk=friend.pk %}">
-                    <button type="button" class="btn btn-danger">Un friend</button>
-                    </a>
-                {% endfor %}
-
-            </div>
-        </div> 
