@@ -7,7 +7,7 @@ from django.conf import settings
 app_name ='home'
 
 urlpatterns = [
-    path('', views.HomeView.as_view(), name='home'),
+    path('home/', views.HomeView.as_view(), name='home'),
     path('connect/<operation>.*/<int:pk>', views.change_friend, name = 'change_friends')
 ]
 if settings.DEBUG: 
